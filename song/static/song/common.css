@@ -1,0 +1,273 @@
+/*基本のスタイル*/
+
+body {
+  margin: 24px;
+  padding: 0;
+  font-family: 'Noto Sans JP', sans-serif;
+  text-align: center;
+  background-color: #e4f1fc;
+  color: rgb(69, 69, 69);
+  overflow-y: scroll;
+}
+
+h1 {
+  font-size: 48px;
+}
+
+h2 {
+  font-size: 26px;
+}
+
+h3 {
+  font-size: 28px;
+}
+
+header {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 10px;
+}
+
+header img {
+  width: 120px; 
+  height: 120px; 
+}
+
+main {
+  background-color: white;
+  color: rgb(69, 69, 69);
+  text-align: left;
+  padding: 25px;
+  font-size: 24px;
+}
+
+.site_summary {
+  font-size: 18px;
+}
+
+.main_content{
+  display:flex;
+  flex-flow: column;  
+  background-color: #e4f1fc; /* 寒色の背景色 */
+  color: rgb(69, 69, 69);
+  padding: 10px;
+  border-top: 1px solid rgb(132, 132, 132);
+  border-bottom: 1px solid rgb(132, 132, 132);
+}
+
+.accordion-001 {
+  background-color: #f0f5f9;
+  margin-top: 5px;
+  margin-bottom: 5px;
+  border-radius: 5px;
+}
+
+.accordion-001:not([open]) {
+  margin-bottom: 3px;
+}
+
+.accordion-001 summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  padding: 0.5em 1em;
+  border-radius: 5px;
+  background-color: #146096;
+  color: #fff;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.accordion-001 summary::-webkit-details-marker {
+  display: none;
+}
+
+.accordion-001 summary::after {
+  transform: translateY(-25%) rotate(45deg);
+  width: 7px;
+  height: 7px;
+  margin-left: 10px;
+  border-bottom: 3px solid #fff;
+  border-right: 3px solid #fff;
+  content: '';
+  transition: transform .3s;
+}
+
+.accordion-001[open] summary::after {
+  transform: rotate(225deg);
+}
+
+.accordion-001 p {
+  transform: translateY(-10px);
+  opacity: 0;
+  margin: 0;
+  padding: 1em 2em 2em 2em;
+  color: #333333;
+  transition: transform .5s, opacity .5s;
+}
+
+.accordion-001[open] p {
+  transform: none;
+  opacity: 1;
+}
+
+.accordion-001 summary:hover{
+  background-color: #134e79;
+}
+
+.button_container {
+  display: flex;
+  flex-direction: column;
+  padding: 7px;
+  transition: transform .5s, opacity .5s;
+}
+
+.buttons{
+  display: flex;
+  justify-content: space-evenly;
+  padding: 8px;
+}
+
+button {
+  font-family: 'Noto Sans JP', sans-serif;
+  background-color: #2086e5;
+  color: white;
+  border-bottom: 7px solid #155999;
+  font-size: 16px;
+  border-radius: 5px;
+  width: 50mm;
+  height: 15mm;
+  cursor: pointer;
+}
+
+button:hover {
+  background-color: #0056b3; /* ホバー時の色 */
+  border-bottom: 4px solid #003872;
+}
+
+/* result.html スタイル */
+
+.result{
+  text-align: left;
+}
+
+ol {
+  counter-reset:li; /*数字をリセット*/
+  list-style-type: none; /*数字を一旦消す*/
+  padding:0;
+}
+
+ol li {
+  display: flex;
+  align-items: center;
+  height: 90px;
+  width: 100%;
+  margin-bottom: 5px;
+  padding-top: 7px;
+  padding-bottom: 7px;
+  border-radius: 5px;
+}
+
+ol li::before{
+  /* 以下数字をつける */
+  content: counter(li);
+  counter-increment: li;
+  /*数字のデザイン変える*/
+  display:inline-block;
+  color: #333333;
+  font-family: 'Noto Sans JP', sans-serif;
+  font-weight:bold;
+  font-size: 24px;
+  min-width: 48px;
+  min-height: 48px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+}
+
+ol li:hover{
+  background-color: #d8ebff; /* ホバー時の色 */
+}
+
+.box1{
+  display: flex;
+  align-items: center;     /*上下中央揃え*/
+  margin: 5px;
+}
+
+.box1 img{
+  position: relative;
+  width: 90px;
+  height: 90px;
+}
+
+.box2{
+  display: flex;
+  flex-direction: column;
+  padding: 8px;
+  padding-top: 16px;
+  padding-bottom: 16px;
+  width: 10em;
+  white-space: nowrap; /* 横幅のMAXに達しても改行しない */
+  overflow: hidden; /* ハミ出した部分を隠す */
+  text-overflow: ellipsis; /* 「…」と省略 */
+  margin: 5px;
+}
+
+.name{
+  height: 50%;
+  font-size: 28px;
+  font-weight:  800;
+  color: #333333;
+  padding-bottom: 2px;
+  white-space: nowrap; /* 横幅のMAXに達しても改行しない */
+  overflow: hidden; /* ハミ出した部分を隠す */
+  text-overflow: ellipsis; /* 「…」と省略 */
+}
+
+.name:hover{
+  text-decoration: underline;
+}
+
+.artist{
+  height: 50%;
+  font-size: 20px;
+  font-weight: 600;
+  color: #585858;
+  padding-top: 2px;
+  white-space: nowrap; /* 横幅のMAXに達しても改行しない */
+  overflow: hidden; /* ハミ出した部分を隠す */
+  text-overflow: ellipsis; /* 「…」と省略 */
+}
+.artist{
+  height: 50%;
+  font-size: 20px;
+  font-weight: 600;
+  color: #585858;
+  padding-top: 2px;
+}
+
+.artist:hover{
+  color: #333333;
+  text-decoration: underline;
+}
+  
+.box3{
+  margin: 5px;
+  width: 18em;
+}
+
+.box3 audio{
+  margin: 0;
+  display: flex;
+  align-items: center;
+}
+
+.box4{
+  display: flex;
+  align-items: center;
+  margin: 5px;
+}

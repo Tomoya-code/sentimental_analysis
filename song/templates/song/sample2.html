@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Webアプリケーションのサンプル</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'song/sample.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet">
+    
+  </head>
+  <body>
+    <header>
+      <img src="{% static 'song/logo2.png' %}" alt="ロゴ">
+      <h1>Django Sample Application</h1>
+      <img src="{% static 'song/logo2.png' %}" alt="ロゴ">
+    </header>
+
+    <main>
+      
+      <section class="result">
+        <ol>
+          {% for song in top_songs %}
+            <li>
+              <div style="display: flex;">
+
+                <div class="box1">
+                  <img src="{% static 'song\jaket1.png' %}" alt="ジャケット">
+                </div>
+
+                <div class="box2">
+                  <div class="name">{{song.name}}</div>
+                  <div class="artist">{{song.artist}}</div>
+                </div>
+
+                <div class="audio-player">
+                  <div class="tracks">
+                    {% if not song.prev_url %}
+                      <p>楽曲のプレビューができません</p>
+                    {% else %}
+                      <audio src="{{song.prev_url}}"></audio>
+                      <div class="controls">
+                        <button class="toggle" type="button"></button>
+                      </div>
+                      
+                      <script src="{% static 'js\sample.js' %}"></script>                    
+                    {% endif %}
+                  </div>
+                </div>
+
+                <div class="box4"> 
+                  0.0
+                </div>
+              
+              </div>
+            </li>
+            <hr>
+          {% endfor %}
+
+        </ol>
+      </section>
+
+    </main>
+  </body>
+</html>

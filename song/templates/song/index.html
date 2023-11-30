@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Webアプリケーションのサンプル</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'song/common.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <header>
+      <img src="{% static 'song/logo2.png' %}" alt="ロゴ">
+      <h1><a href="/song/top">感情分析による楽曲検索アプリ</a></h1>
+      <img src="{% static 'song/logo2.png' %}" alt="ロゴ">
+    </header>
+
+    <main>
+      <section class="site_summary">
+        <h2>このサイトについて</h2>
+        <p>ユーザーの気持ちやイメージに合った楽曲を検索することができます。探したい曲はあるけどタイトル名やアーティスト名が思い浮かばない人に
+          最適な楽曲を提供します。楽曲の歌詞をAIの感情分析を用いることで8つの感情のスコアを算出しています。
+          登録されている曲は全部で530曲です。
+        </p>
+      </section>
+
+      <section class="main_content">
+        <details class="accordion-001"> 
+          <summary>
+              感情を選択してください
+          </summary>
+          
+          <div class="button_container">
+            <div class="buttons">
+              <form action="{% url 'sort_songs' column='yorokobi' %}" method="post">
+                {% csrf_token %}
+                <button type="submit">喜び</button>
+              </form>
+              <form action="{% url 'sort_songs' column='kanasimi' %}" method="post">
+                {% csrf_token %}
+                <button type="submit">悲しみ</button>
+              </form>
+              <form action="{% url 'sort_songs' column='kitai' %}" method="post">
+                {% csrf_token %}
+                <button type="submit">期待</button>
+              </form>
+              <form action="{% url 'sort_songs' column='odoroki' %}" method="post">
+                {% csrf_token %}
+                <button type="submit">驚き</button>
+              </form>
+            </div>
+
+            <div class="buttons">
+              <form action="{% url 'sort_songs' column='ikari' %}" method="post">
+                {% csrf_token %}
+                <button type="submit">怒り</button>
+              </form>
+              <form action="{% url 'sort_songs' column='osore' %}" method="post">
+                {% csrf_token %}
+                <button type="submit">恐れ</button>
+              </form>
+              <form action="{% url 'sort_songs' column='keno' %}" method="post">
+                {% csrf_token %}
+                <button type="submit">嫌悪</button>
+              </form>
+              <form action="{% url 'sort_songs' column='sinrai' %}" method="post">
+                {% csrf_token %}
+                <button type="submit">信頼</button>
+              </form>
+              </div>
+          </div>
+        </details>
+        <details class="accordion-001"> 
+          <summary>
+              特徴を選択してください
+          </summary>
+          
+          <div class="button_container">
+            <div class="buttons">
+              <form action="{% url 'sort_songs' column='release_date' %}" method="post">
+                {% csrf_token %}
+                <button type="submit">リリース日</button>
+              </form>
+              <form action="{% url 'sort_songs' column='length' %}" method="post">
+                {% csrf_token %}
+                <button type="submit">長さ</button>
+              </form>
+              <form action="{% url 'sort_songs' column='popularity' %}" method="post">
+                {% csrf_token %}
+                <button type="submit">人気度</button>
+              </form>
+              <form action="{% url 'sort_songs' column='danceability' %}" method="post">
+                {% csrf_token %}
+                <button type="submit">踊れる曲</button>
+              </form>
+              <form action="{% url 'sort_songs' column='acousticness' %}" method="post">
+                {% csrf_token %}
+                <button type="submit">アコースティック感</button>
+              </form>
+            </div>
+
+            <div class="buttons">
+              <form action="{% url 'sort_songs' column='energy' %}" method="post">
+                {% csrf_token %}
+                <button type="submit">エネルギッシュさ</button>
+              </form>
+              <form action="{% url 'sort_songs' column='instrumentalness' %}" method="post">
+                {% csrf_token %}
+                <button type="submit">インスト感</button>
+              </form>
+              <form action="{% url 'sort_songs' column='liveness' %}" method="post">
+                {% csrf_token %}
+                <button type="submit">ライブ感</button>
+              </form>
+              <form action="{% url 'sort_songs' column='loudness' %}" method="post">
+                {% csrf_token %}
+                <button type="submit">音量・音圧</button>
+              </form>
+              <form action="{% url 'sort_songs' column='tempo' %}" method="post">
+                {% csrf_token %}
+                <button type="submit">テンポ</button>
+              </form>
+            </div>
+            
+          </div>
+        </details>
+      </section>
+    </main>
+  </body>
+</html>

@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+{% load static %}
+<html>
+  <head>
+    <meta charset="UTF-8">
+    <title>Webアプリケーションのサンプル</title>
+    <link rel="stylesheet" type="text/css" href="{% static 'song/common.css' %}">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+JP&display=swap" rel="stylesheet">
+  </head>
+  <body>
+    <header>
+      <img src="{% static 'song/logo2.png' %}" alt="ロゴ">
+      <h1><a href="/song/top">感情分析による楽曲検索アプリ</a></h1>
+      <img src="{% static 'song/logo2.png' %}" alt="ロゴ">
+    </header>
+
+    <main>
+      <section class="site_summary">
+        <h2>検索結果</h2>
+        <p>表示数: {{ result|length }} 曲</p>
+      </section>
+
+      <section class="main_content">
+        <details class="accordion-001"> 
+          <summary>
+              感情を選択してください
+          </summary>
+          
+          <div class="button_container">
+            <div class="buttons">
+              <form action="{% url 'sort_songs' column='yorokobi' %}" method="post">
+                {% csrf_token %}
+                <button type="submit">喜び</button>
+              </form>
+              <form action="{% url 'sort_songs' column='kanasimi' %}" method="post">
+                {% csrf_token %}
+                <button type="submit">悲しみ</button>
+              </form>
+              <form action="{% url 'sort_songs' column='kitai' %}" method="post">
+                {% csrf_token %}
+                <button type="submit">期待</button>
+              </form>
+              <form action="{% url 'sort_songs' column='odoroki' %}" method="post">
+                {% csrf_token %}
+                <button type="submit">驚き</button>
+              </form>
+            </div>
+
+            <div class="buttons">
+              <form action="{% url 'sort_songs' column='ikari' %}" method="post">
+                {% csrf_token %}
+                <button type="submit">怒り</button>
+              </form>
+              <form action="{% url 'sort_songs' column='osore' %}" method="post">
+                {% csrf_token %}
+                <button type="submit">恐れ</button>
+              </form>
+              <form action="{% url 'sort_songs' column='keno' %}" method="post">
+                {% csrf_token %}
+                <button type="submit">嫌悪</button>
+              </form>
+              <form action="{% url 'sort_songs' column='sinrai' %}" method="post">
+                {% csrf_token %}
+                <button type="submit">信頼</button>
+              </form>
+              </div>
+          </div>
+        </details>
+        <details class="accordion-001"> 
+          <summary>
+              特徴を選択してください
+          </summary>
+          
+          <div class="button_container">
+            <div class="buttons">
+              <form action="{% url 'sort_songs' column='release_date' %}" method="post">
+                {% csrf_token %}
+                <button type="submit">リリース日</button>
+              </form>
+              <form action="{% url 'sort_songs' column='length' %}" method="post">
+                {% csrf_token %}
+                <button type="submit">長さ</button>
+              </form>
+              <form action="{% url 'sort_songs' column='popularity' %}" method="post">
+                {% csrf_token %}
+                <button type="submit">人気度</button>
+              </form>
+              <form action="{% url 'sort_songs' column='danceability' %}" method="post">
+                {% csrf_token %}
+                <button type="submit">踊れる曲</button>
+              </form>
+              <form action="{% url 'sort_songs' column='acousticness' %}" method="post">
+                {% csrf_token %}
+                <button type="submit">アコースティック感</button>
+              </form>
+            </div>
+
+            <div class="buttons">
+              <form action="{% url 'sort_songs' column='energy' %}" method="post">
+                {% csrf_token %}
+                <button type="submit">エネルギッシュさ</button>
+              </form>
+              <form action="{% url 'sort_songs' column='instrumentalness' %}" method="post">
+                {% csrf_token %}
+                <button type="submit">インスト感</button>
+              </form>
+              <form action="{% url 'sort_songs' column='liveness' %}" method="post">
+                {% csrf_token %}
+                <button type="submit">ライブ感</button>
+              </form>
+              <form action="{% url 'sort_songs' column='loudness' %}" method="post">
+                {% csrf_token %}
+                <button type="submit">音量・音圧</button>
+              </form>
+              <form action="{% url 'sort_songs' column='tempo' %}" method="post">
+                {% csrf_token %}
+                <button type="submit">テンポ</button>
+              </form>
+            </div>
+            
+          </div>
+        </details>
+      </section>
+
+      <section class="result">
+        <ol>
+            {% for song in result %}
+                <li>
+                  <div style="display: flex;">
+                    <div class="box1">
+                      <img src="{{song.img_url}}" alt="ジャケット">
+                    </div>
+
+                    <div class="box2">
+                      <div class="name">{{ song.name }}</div>
+                      <div class="artist">{{ song.artist }}</div>
+                    </div>
+                    <div class="box3">
+                        <!-- 楽曲再生ボタン -->
+                      <figure>
+                        {% if not song.prev_url %}
+                          <p>楽曲のプレビューができません</p>
+                        {% else %}
+                          <audio controls src="{{song.prev_url}}"></audio>
+                        {% endif %}
+                      </figure>
+                    </div>
+                    <div class="box4">
+                      {% if column == 'yorokobi' %}
+                          喜び: {{ song.yorokobi|floatformat:3 }}
+                      {% elif column == 'kanasimi' %}
+                          悲しみ: {{ song.kanasimi|floatformat:3 }}
+                      {% elif column == 'kitai' %}
+                          期待: {{ song.kitai|floatformat:3 }}
+                      {% elif column == 'odoroki' %}
+                          驚き: {{ song.odoroki|floatformat:3 }}
+                      {% elif column == 'ikari' %}
+                          怒り: {{ song.ikari|floatformat:3 }}
+                      {% elif column == 'osore' %}
+                          恐れ: {{ song.osore|floatformat:3 }}
+                      {% elif column == 'keno' %}
+                          嫌悪: {{ song.keno|floatformat:3 }}
+                      {% elif column == 'sinrai' %}
+                          信頼: {{ song.sinrai|floatformat:3 }}
+                      
+                      {% elif column == 'release_date' %}
+                          リリース日: {{ song.release_date }}
+                      {% elif column == 'length' %}
+                          長さ: {{ song.formatted_length }}
+                      {% elif column == 'popularity' %}
+                          人気度: {{ song.popularity }}
+                      {% elif column == 'danceability' %}
+                          ダンサビリティ: {{ song.danceability }}
+                      {% elif column == 'acousticness' %}
+                          アコースティック感: {{ song.acousticness }}
+                      {% elif column == 'energy' %}
+                          エネルギッシュさ: {{ song.energy }}
+                      {% elif column == 'instrumentalness' %}
+                          インスト感: {{ song.instrumentalness }}
+                      {% elif column == 'liveness' %}
+                          ライブ感: {{ song.liveness }}
+                      {% elif column == 'loudness' %}
+                          音量・音圧: {{ song.loudness }}dB
+                      {% elif column == 'tempo' %}
+                          テンポ: {{ song.tempo|floatformat:0 }}bpm
+                      {% else %}
+                          0.0
+                      {% endif %}
+                    </div>
+                      
+                  </div>
+                </li>
+                <hr>
+            {% endfor %}
+        </ol>
+      </section>
+
+    </main>
+  </body>
+</html>

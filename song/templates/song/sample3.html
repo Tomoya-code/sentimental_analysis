@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sort Songs</title>
+</head>
+<body>
+
+<h1><a href="/song/sample">Sort Songs</a></h1>
+
+<!-- ボタンで感情の選択を行う -->
+<div class="buttons">
+              <form action="{% url 'sort_songs' column='yorokobi' %}" method="post">
+                {% csrf_token %}
+                <button type="submit">喜び</button>
+              </form>
+              <form action="{% url 'sort_songs' column='kanasimi' %}" method="post">
+                {% csrf_token %}
+                <button type="submit">悲しみ</button>
+              </form>
+              <form action="{% url 'sort_songs' column='kitai' %}" method="post">
+                {% csrf_token %}
+                <button type="submit">期待</button>
+              </form>
+              <form action="{% url 'sort_songs' column='odoroki' %}" method="post">
+                {% csrf_token %}
+                <button type="submit">驚き</button>
+              </form>
+</div>
+
+<div class="buttons">
+              <form action="{% url 'sort_songs' column='ikari' %}" method="post">
+                {% csrf_token %}
+                <button type="submit">怒り</button>
+              </form>
+              <form action="{% url 'sort_songs' column='osore' %}" method="post">
+                {% csrf_token %}
+                <button type="submit">恐れ</button>
+              </form>
+              <form action="{% url 'sort_songs' column='keno' %}" method="post">
+                {% csrf_token %}
+                <button type="submit">嫌悪</button>
+              </form>
+              <form action="{% url 'sort_songs' column='sinrai' %}" method="post">
+                {% csrf_token %}
+                <button type="submit">信頼</button>
+              </form>
+</div>
+
+</body>
+</html>

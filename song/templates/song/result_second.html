@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+{% load static %}
+
+<html>
+    <head>
+        <meta charset="UTF-8">
+        <title>sample app</title>
+        <link rel="stylesheet" type="text/css" href="{% static 'song/common.css' %}">
+    </head>
+    <body>
+        <h1>Django Sample Application</h1>
+
+        <h2>2nd Sort Result</h2>
+        <h1>上位10曲 （感情: {{ emotion }}） </h1>
+        <div style="display: flex; justify-content: space-between;">
+            <form action="{% url 'sort_and_display_songs_second' emotion='yorokobi' %}" method="post">
+                {% csrf_token %}
+                <button type="submit">喜び</button>
+            </form>
+            <form action="{% url 'sort_and_display_songs_second' emotion='kanasimi' %}" method="post">
+                {% csrf_token %}
+                <button type="submit">悲しみ</button>
+            </form>
+            <form action="{% url 'sort_and_display_songs_second' emotion='kitai' %}" method="post">
+                {% csrf_token %}
+                <button type="submit">期待</button>
+            </form>
+            <form action="{% url 'sort_and_display_songs_second' emotion='odoroki' %}" method="post">
+                {% csrf_token %}
+                <button type="submit">驚き</button>
+            </form>
+            <form action="{% url 'sort_and_display_songs_second' emotion='ikari' %}" method="post">
+                {% csrf_token %}
+                <button type="submit">怒り</button>
+            </form>
+            <form action="{% url 'sort_and_display_songs_second' emotion='osore' %}" method="post">
+                {% csrf_token %}
+                <button type="submit">恐れ</button>
+            </form>
+            <form action="{% url 'sort_and_display_songs_second' emotion='keno' %}" method="post">
+                {% csrf_token %}
+                <button type="submit">嫌悪</button>
+            </form>
+            <form action="{% url 'sort_and_display_songs_second' emotion='sinrai' %}" method="post">
+                {% csrf_token %}
+                <button type="submit">信頼</button>
+            </form>
+        </div>
+        
+        <ol>
+            {% for song in sorted_songs %}
+                <li>{{ song.name }} - {{ song.artist }} - 
+                    {% if first_emotion == 'yorokobi' %}
+                        {{ song.yorokobi }}
+                    {% elif first_emotion == 'kanasimi' %}
+                        {{ song.kanasimi }}
+                    {% elif first_emotion == 'kitai' %}
+                        {{ song.kitai }}
+                    {% elif first_emotion == 'odoroki' %}
+                        {{ song.odoroki }}
+                    {% elif first_emotion == 'ikari' %}
+                        {{ song.ikari }}
+                    {% elif first_emotion == 'osore' %}
+                        {{ song.osore }}
+                    {% elif first_emotion == 'keno' %}
+                        {{ song.keno }}
+                    {% elif first_emotion == 'sinrai' %}
+                        {{ song.sinrai }}
+                    {% else %}
+                        0.0
+                    {% endif %}
+                    -
+                    {% if emotion == 'yorokobi' %}
+                        {{ song.yorokobi }}
+                    {% elif emotion == 'kanasimi' %}
+                        {{ song.kanasimi }}
+                    {% elif emotion == 'kitai' %}
+                        {{ song.kitai }}
+                    {% elif emotion == 'odoroki' %}
+                        {{ song.odoroki }}
+                    {% elif emotion == 'ikari' %}
+                        {{ song.ikari }}
+                    {% elif emotion == 'osore' %}
+                        {{ song.osore }}
+                    {% elif emotion == 'keno' %}
+                        {{ song.keno }}
+                    {% elif emotion == 'sinrai' %}
+                        {{ song.sinrai }}
+                    {% else %}
+                        0.0
+                    {% endif %}
+                </li>
+            {% endfor %}
+        </ol>
+        
+        <br>
+
+    </body>
+</html>
+
